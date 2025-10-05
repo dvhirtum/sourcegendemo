@@ -1,5 +1,6 @@
-﻿namespace SourceGenDemo.Generators;
-
-public class Class1
+﻿namespace SourceGenDemo.Generators
 {
+    public class Class1
+    {
+    }
 }
