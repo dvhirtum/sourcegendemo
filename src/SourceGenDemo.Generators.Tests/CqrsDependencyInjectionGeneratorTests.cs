@@ -6,7 +6,7 @@ namespace SourceGenDemo.Generators.Tests;
 public class CqrsDependencyInjectionGeneratorTests
 {
     [Fact]
-    public Task Should_Create_An_Empty_Extension_Method_If_There_Are_No_Handlers()
+    public async Task Should_Create_An_Empty_Extension_Method_If_There_Are_No_Handlers()
     {
         var source =
             """
@@ -21,11 +21,11 @@ public class CqrsDependencyInjectionGeneratorTests
             }
             """;
         
-        return Verify(source);
+        await Verify(source);
     }
     
     [Fact]
-    public Task Should_Create_A_Scoped_Service_In_The_Extension_Method_If_There_Is_A_Handler()
+    public async Task Should_Create_A_Scoped_Service_In_The_Extension_Method_If_There_Is_A_Handler()
     {
         var source =
             """
@@ -47,10 +47,10 @@ public class CqrsDependencyInjectionGeneratorTests
             }
             """;
         
-        return Verify(source);
+        await Verify(source);
     }
 
-    private Task Verify(string source)
+    private async Task Verify(string source)
     {
         // Arrange
         var syntaxTree = CSharpSyntaxTree.ParseText(source);
@@ -67,6 +67,6 @@ public class CqrsDependencyInjectionGeneratorTests
         driver = driver.RunGenerators(compilation);
         
         // Assert
-        return Verifier.Verify(driver);
+        await Verifier.Verify(driver);
     }
 }
